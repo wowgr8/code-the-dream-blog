@@ -26,20 +26,19 @@ const App = () => (
     <Search />
 
     <hr />
-    
-    {/* creating an instance of List component */} 
-    <List />
-    {/* creating another instance of List component */} 
+        
     <List />
   </div> 
 );
 
-const Search = () => (
-  <div>
-    <label htmlFor="search">Search: </label>
-    <input id="search" type="text" />
-  </div> 
-);
+const Search = () => {
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" />
+    </div>
+  ); 
+};
 
 const List = () => (
   <ul>
@@ -55,6 +54,5 @@ const List = () => (
       ))}
   </ul>
 ); 
-
 
 export default App;
