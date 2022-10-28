@@ -29,7 +29,7 @@ const App = () => {
 
       <hr />
 
-      <List />
+      <List list={stories}/>
     </div> 
   )
 };
@@ -47,9 +47,9 @@ const Search = () => {
   ); 
 };
 
-const List = () => (
+const List = (props) => (
   <ul>
-    {list.map((item) => (
+    {props.list.map((item) => (
       <li key={item.objectID}>
         <span>
           <a href={item.url}>{item.title}</a>
