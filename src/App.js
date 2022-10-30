@@ -20,18 +20,15 @@ const App = () => {
     }
   ];
 
-    // A
-    const handleSearch = (event) => {
-      // C
-      console.log(event.target.value);
-    };
+  const handleSearch = (event) => {
+    console.log(event.target.value);
+  };
   
   return(
     <div>
       <h1>My Hacker Stories</h1>
 
-      {/* // B */}
-      <Search onSearch={handleSearch}/>
+      <Search onSearch={handleSearch} />
 
       <hr />
 
@@ -46,10 +43,9 @@ const Search = (props) => {
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
     console.log(event.target.value);
-  };
 
-  // B
-  props.onSearch(event);
+    props.onSearch(event);
+  };
 
   return (
     <div>
