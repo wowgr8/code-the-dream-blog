@@ -29,3 +29,14 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
+## Technologies Used <a id="technologies"></a>  
+
+* React.js
+* JavaScript - JSX
+* Node.js
+* Webpack
+* HTML
+* CSS
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
