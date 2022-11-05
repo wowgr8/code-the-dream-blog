@@ -139,3 +139,19 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 </details>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
+## Known Bugs <a id="bugs"></a>
+
+* _None ATM _
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
+## Contact Me <a id="contact"></a> 
+
+Cesar Lopez:
+* Email: [Lopez.cesar.aug@gmail.com](mailto:lopez.cesar.aug@gmail.com)
+* Github: [wowgr8](https://github.com/wowgr8)
+* LinkedIn: [https://www.linkedin.com/in/cesar-aug-lopez](https://www.linkedin.com/in/cesar-aug-lopez)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
