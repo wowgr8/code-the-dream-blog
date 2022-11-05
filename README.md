@@ -4,7 +4,7 @@
 
 ### _November 04, 2022_
 
-#### _A React app for generic blogging website._
+#### _A React blogging app for all things Code The Dream._
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
