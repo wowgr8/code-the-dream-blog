@@ -46,3 +46,9 @@ A React application for blogging all things Code The Dream - Following along wit
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
+## Component Diagram and Hierarchy <a id = "diagram"></a>
+
+![ WIP- coming soon ](url img placeholder)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
+
