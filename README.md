@@ -155,3 +155,8 @@ Cesar Lopez:
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png)
 
+## License <a id="license"></a>
+
+_MIT_
+
+Copyright (c) _2022_ _Cesar Lopez_
