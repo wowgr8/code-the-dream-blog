@@ -55,9 +55,9 @@ const Search = ({ search, onSearch }) => (
   </div>
 ); 
 
-const List = (props) => (
+const List = ({ list }) => (
   <ul>
-    {props.list.map((item) => (
+    {list.map((item) => (
       <Item key={item.objectID} item={item} /> 
     ))}
   </ul>
