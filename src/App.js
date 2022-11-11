@@ -43,17 +43,19 @@ const App = () => {
   )
 };
 
-const Search = (props) => (
-  <div>
-    <label htmlFor="search">Search: </label>
-    <input 
-      id="search"
-      type="text" 
-      value={props.search} 
-      onChange={props.onSearch} 
-    />
-  </div>
-); 
+const Search = (props) => {
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input 
+        id="search"
+        type="text" 
+        value={props.search} 
+        onChange={props.onSearch} 
+      />
+    </div>
+  )
+}; 
 
 const List = (props) => (
   <ul>
