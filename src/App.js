@@ -24,6 +24,8 @@ const App = () => {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+
+    localStorage.setItem('search', event.target.value); // uses local storage to store the searchTerm accompanied by an identifier whenever a user types into the HTML input field
   };
 
   const searchedStories = stories.filter((story) => 
