@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const App = () => {
   const stories = [
@@ -22,16 +22,18 @@ const App = () => {
 
   const [searchTerm, setSearchTerm] = React.useState(
     localStorage.getItem('search') || 'React'            //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
-  );         
+  );  
+  
+  useEffect(() => { 
+    localStorage.setItem('search', searchTerm); // uses local storage to store the searchTerm accompanied by an identifier whenever a user types into the HTML input field
+  }, [searchTerm]); // Whenever and wherever the searchTerm state is updated via setSearchTerm, the browser’s local storage will always be in sync with it.
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-
-    localStorage.setItem('search', event.target.value); // uses local storage to store the searchTerm accompanied by an identifier whenever a user types into the HTML input field
   };
 
   const searchedStories = stories.filter((story) => 
-  story.title.toLowerCase().includes(searchTerm.toLowerCase())
+    story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
   
   return(
