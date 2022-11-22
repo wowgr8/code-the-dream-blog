@@ -20,7 +20,9 @@ const App = () => {
     }
   ];
 
-  const [searchTerm, setSearchTerm] = React.useState('React');
+  const [searchTerm, setSearchTerm] = React.useState(
+    localStorage.getItem('search') || 'React'            //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
+  );         
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
