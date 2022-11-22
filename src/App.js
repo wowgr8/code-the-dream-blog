@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
-  const [value, setValue] = useState(localStorage.setItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
+  const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
 
   useEffect(() => { 
     localStorage.setItem(key, value); // uses local storage to store the searchTerm accompanied by an identifier whenever a user types into the HTML input field
