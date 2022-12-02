@@ -62,9 +62,9 @@ const App = () => {
   )
 };
 
-const InputWithLabel = ({ id, label, value, type = 'text', onInputChange }) => (
+const InputWithLabel = ({ id, children, value, type = 'text', onInputChange }) => ( //  Instead of using the label prop, use the children prop to render everything that has been passed down from above
   <>
-    <label htmlFor={id}>{label} </label>
+    <label htmlFor={id}>{children} </label>
     &nbsp;
     <input 
       id={id}
