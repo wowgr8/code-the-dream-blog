@@ -52,7 +52,7 @@ const App = () => {
         value={searchTerm}
         onInputChange={handleSearch}
       >
-        Search:
+        <strong>Search:</strong>
       </InputWithLabel>
 
       <hr />
@@ -64,7 +64,8 @@ const App = () => {
 
 const InputWithLabel = ({ id, children, value, type = 'text', onInputChange }) => ( //  Instead of using the label prop, use the children prop to render everything that has been passed down from above
   <>
-    <label htmlFor={id}>{children} </label>
+  {/* Everything that’s passed between a component’s elements can be accessed as children in the component and be rendered somewhere. Sometimes when using a React component, you want to have more freedom from the outside regarding what to render on the inside of a component */}
+    <label htmlFor={id}>{children} </label> 
     &nbsp;
     <input 
       id={id}
