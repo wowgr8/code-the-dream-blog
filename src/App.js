@@ -38,6 +38,14 @@ const App = () => {
 
   const [stories, setStories] = useState(initialStories);
 
+  const handleRemoveStory = (item) => {
+    const newStories = stories.filter(  // will look for the item you want to remove, exclude it from the stories array and return whats left as the newStories variable.
+      (story) => item.objectID !== story.objectID
+    );
+
+    setStories(newStories);
+  }
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -60,7 +68,7 @@ const App = () => {
 
       <hr />
 
-      <List list={searchedStories}/>
+      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
     </div> 
   )
 };
