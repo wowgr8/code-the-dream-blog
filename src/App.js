@@ -29,6 +29,9 @@ const initialStories = [
   }
 ];
 
+const getAsyncStories = () => // returns a promise with data in its shorthand version once it resolves. The resolved object holds the previous list of stories
+  Promise.resolve({ data: { stories: initialStories } });
+
 const App = () => {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState(
