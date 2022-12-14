@@ -87,7 +87,10 @@ const App = () => {
 
       <hr />
 
-      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+      {isLoading 
+      ? (<p>Loading...</p>) 
+      : (<List list={searchedStories} onRemoveItem={handleRemoveStory} />)
+      }
     </div> 
   )
 };
