@@ -47,14 +47,17 @@ const App = () => {
 
   const [stories, setStories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(()=> {
     setIsLoading(true);
 
-    getAsyncStories().then(result => {
-      setStories(result.data.stories);
-      setIsLoading(false);
-    });
+    getAsyncStories()
+      .then(result => {
+        setStories(result.data.stories);
+        setIsLoading(false);
+      })
+      .catch(() => setIsError(true));
   }, []);
 
   const handleRemoveStory = (item) => {
@@ -86,6 +89,9 @@ const App = () => {
       </InputWithLabel>
 
       <hr />
+
+      {/* If the condition is true, the expression after the logical && operator will be the output. If the condition is false, React ignores it and skips the expression. */}
+      {isError && <p>Something went wrong ...</p>}
 
       {isLoading 
       ? (<p>Loading...</p>) 
