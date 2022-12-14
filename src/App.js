@@ -5,6 +5,10 @@ import React, { useEffect, useReducer, useState } from 'react';
 const storiesReducer = (state, action) => {
   if (action.type === 'SET_STORIES') {
     return action.payload;
+  } else if (action.type === 'REMOVE_STORY') {
+    return state.filter(
+      (story) => action.payload.objectID !== story.objectID
+    );
   } else {
     throw new Error();
   }
@@ -77,13 +81,9 @@ const App = () => {
   }, []);
 
   const handleRemoveStory = (item) => {
-    const newStories = stories.filter(  // will look for the item you want to remove, exclude it from the stories array and return whats left as the newStories variable.
-      (story) => item.objectID !== story.objectID
-    );
-
     dispatchStories({
-      type: 'SET_STORIES',
-      payload: newStories,
+      type: 'REMOVE_STORY',
+      payload: item,
     });
   };
 
