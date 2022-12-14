@@ -1,4 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
+
+//A reducer function always receives state and action. Based on these two arguments, a reducer always returns a new state
+// Instead of setting the state explicitly with the state updater function from useState, the useReducer state updater function dispatches an action for the reducer. The action comes with a type and an optional payload
+const storiesReducer = (state, action) => {
+  if (action.type === 'SET_STORIES') {
+    return action.payload;
+  } else {
+    throw new Error();
+  }
+};
 
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
@@ -45,7 +55,10 @@ const App = () => {
     'React'
   );  
 
-  const [stories, setStories] = useState([]);
+  const [stories, dispatchStories] = useReducer(
+    storiesReducer,
+    []
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -54,7 +67,10 @@ const App = () => {
 
     getAsyncStories()
       .then(result => {
-        setStories(result.data.stories);
+        dispatchStories({
+          type: 'SET_STORIES',
+          payload: result.data.stories,
+        });        
         setIsLoading(false);
       })
       .catch(() => setIsError(true));
@@ -65,8 +81,11 @@ const App = () => {
       (story) => item.objectID !== story.objectID
     );
 
-    setStories(newStories);
-  }
+    dispatchStories({
+      type: 'SET_STORIES',
+      payload: newStories,
+    });
+  };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
