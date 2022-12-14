@@ -3,14 +3,15 @@ import React, { useEffect, useReducer, useState } from 'react';
 //A reducer function always receives state and action. Based on these two arguments, a reducer always returns a new state
 // Instead of setting the state explicitly with the state updater function from useState, the useReducer state updater function dispatches an action for the reducer. The action comes with a type and an optional payload
 const storiesReducer = (state, action) => {
-  if (action.type === 'SET_STORIES') {
-    return action.payload;
-  } else if (action.type === 'REMOVE_STORY') {
-    return state.filter(
-      (story) => action.payload.objectID !== story.objectID
-    );
-  } else {
-    throw new Error();
+  switch (action.type) {
+    case 'SET_STORIES' :
+      return action.payload;
+    case 'REMOVE_STORY' :
+      return state.filter(
+        (story) => action.payload.objectID !== story.objectID
+      );
+    default:
+      throw new Error();
   }
 };
 
