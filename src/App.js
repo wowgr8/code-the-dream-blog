@@ -49,8 +49,11 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(()=> {
+    setIsLoading(true);
+
     getAsyncStories().then(result => {
       setStories(result.data.stories);
+      setIsLoading(false);
     });
   }, []);
 
