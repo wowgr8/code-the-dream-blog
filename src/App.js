@@ -39,7 +39,13 @@ const App = () => {
     'React'
   );  
 
-  const [stories, setStories] = useState(initialStories);
+  const [stories, setStories] = useState([]);
+
+  useEffect(()=> {
+    getAsyncStories().then(result => {
+      setStories(result.data.stories);
+    });
+  }, []);
 
   const handleRemoveStory = (item) => {
     const newStories = stories.filter(  // will look for the item you want to remove, exclude it from the stories array and return whats left as the newStories variable.
