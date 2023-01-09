@@ -1,32 +1,5 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 
-// const initialStories = [
-//   {
-//     title: 'React',
-//     url: 'https://reactjs.org/',
-//     author: 'Jordan Walke',
-//     num_comments: 3,
-//     points: 4,
-//     objectID: 0,
-//   },
-//   {
-//     title: 'Redux',
-//     url: 'https://redux.js.org/',
-//     author: 'Dan Abramov, Andrew Clark',
-//     num_comments: 2,
-//     points: 5,
-//     objectID: 1,
-//   },
-// ];
-
-// const getAsyncStories = () => // returns a promise with data in its shorthand version once it resolves. The resolved object holds the previous list of stories
-//   new Promise((resolve) =>
-//     setTimeout(
-//       () => resolve({ data: { stories: initialStories } }),
-//       2000
-//     )
-//   );
-
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
 
@@ -85,9 +58,6 @@ const App = () => {
     { data: [], isLoading: false, isError: false }
   );
 
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [isError, setIsError] = useState(false);
-
   useEffect(()=> {
     if (!searchTerm) return;
 
@@ -116,10 +86,6 @@ const App = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  // const searchedStories = stories.data.filter((story) =>
-  //   story.title.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
   
   return(
     <div>
