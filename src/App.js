@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 const initialStories = [
   {
@@ -123,6 +123,7 @@ const App = () => {
       <InputWithLabel
         id="search"
         value={searchTerm}
+        isFocused
         onInputChange={handleSearch}
       >
         <strong>Search:</strong>
@@ -138,23 +139,33 @@ const App = () => {
         : (<List list={searchedStories} onRemoveItem={handleRemoveStory} />)
       }
     </div> 
-  )
+  );
 };
 
-const InputWithLabel = ({ id, children, value, type = 'text', onInputChange }) => ( //  Instead of using the label prop, use the children prop to render everything that has been passed down from above
-  <>
-  {/* Everything that’s passed between a component’s elements can be accessed as children in the component and be rendered somewhere. Sometimes when using a React component, you want to have more freedom from the outside regarding what to render on the inside of a component */}
-    <label htmlFor={id}>{children} </label> 
-    &nbsp;
-    <input 
-      id={id}
-      type={type} 
-      value={value} 
-      autoFocus
-      onChange={onInputChange} 
-    />
-  </>
-); 
+const InputWithLabel = ({ id, children, value, type = 'text', onInputChange, isFocused }) => { //  Instead of using the label prop, use the children prop to render everything that has been passed down from above
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (isFocused && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isFocused]);
+
+  return(
+    <>
+      {/* Everything that’s passed between a component’s elements can be accessed as children in the component and be rendered somewhere. Sometimes when using a React component, you want to have more freedom from the outside regarding what to render on the inside of a component */}
+      <label htmlFor={id}>{children} </label> 
+      &nbsp;
+      <input 
+        id={id}
+        ref={inputRef}
+        type={type} 
+        value={value} 
+        onChange={onInputChange} 
+      />
+    </>
+  );
+}; 
 
 const List = ({ list, onRemoveItem }) => (
   <ul>
@@ -168,25 +179,20 @@ const List = ({ list, onRemoveItem }) => (
   </ul>
 ); 
 
-const Item = ({ item, onRemoveItem }) => {
-  const handleRemoveItem = () => {
-    onRemoveItem(item);
-  };
+const Item = ({ item, onRemoveItem }) => (
+  <li>
+    <span>
+      <a href={item.url}>{item.title}</a>
+    </span>
+    <span>{item.author}</span>
+    <span>{item.num_comments}</span>
+    <span>{item.points}</span>
+    <span>
+      <button type="button" onClick={() => onRemoveItem(item)}>
+        Dismiss
+      </button>
+    </span>
+  </li> 
+);
 
-  return (
-    <li>
-      <span>
-        <a href={item.url}>{item.title}</a>
-      </span>
-      <span>{item.author}</span>
-      <span>{item.num_comments}</span>
-      <span>{item.points}</span>
-      <span>
-        <button type="button" onClick={handleRemoveItem}>
-          Dismiss
-        </button>
-      </span>
-    </li> 
-  );
-}
 export default App;
