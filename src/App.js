@@ -89,7 +89,7 @@ const App = () => {
   // const [isError, setIsError] = useState(false);
 
   useEffect(()=> {
-    if (searchTerm === '') return;
+    if (!searchTerm) return;
 
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
