@@ -1,5 +1,42 @@
 import React, { useEffect, useReducer, useState } from 'react';
 
+const initialStories = [
+  {
+    title: 'React',
+    url: 'https://reactjs.org/',
+    author: 'Jordan Walke',
+    num_comments: 3,
+    points: 4,
+    objectID: 0,
+  },
+  {
+    title: 'Redux',
+    url: 'https://redux.js.org/',
+    author: 'Dan Abramov, Andrew Clark',
+    num_comments: 2,
+    points: 5,
+    objectID: 1,
+  },
+];
+
+const getAsyncStories = () => // returns a promise with data in its shorthand version once it resolves. The resolved object holds the previous list of stories
+  new Promise((resolve) =>
+    setTimeout(
+      () => resolve({ data: { stories: initialStories } }),
+      2000
+    )
+  );
+
+const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
+  const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
+
+  useEffect(() => { 
+    localStorage.setItem(key, value); // uses local storage to store the searchTerm accompanied by an identifier whenever a user types into the HTML input field
+  }, [value, key]); // Whenever and wherever the searchTerm state is updated via setSearchTerm, the browser’s local storage will always be in sync with it.
+
+  return [value, setValue];
+};
+
 //A reducer function always receives state and action. Based on these two arguments, a reducer always returns a new state
 // Instead of setting the state explicitly with the state updater function from useState, the useReducer state updater function dispatches an action for the reducer. The action comes with a type and an optional payload
 const storiesReducer = (state, action) => {
@@ -29,46 +66,13 @@ const storiesReducer = (state, action) => {
         data: state.data.filter(
           (story) => action.payload.objectID !== story.objectID
         ),
-};
+      };
     default:
       throw new Error();
   }
 };
 
-const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
-  const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
-
-  useEffect(() => { 
-    localStorage.setItem(key, value); // uses local storage to store the searchTerm accompanied by an identifier whenever a user types into the HTML input field
-  }, [value, key]); // Whenever and wherever the searchTerm state is updated via setSearchTerm, the browser’s local storage will always be in sync with it.
-
-  return [value, setValue];
-}
-
-const initialStories = [
-  {
-    title: 'React',
-    url: 'https://reactjs.org/',
-    author: 'Jordan Walke',
-    num_comments: 3,
-    points: 4,
-    objectID: 0,
-  }, 
-  {
-    title: 'Redux',
-    url: 'https://redux.js.org/',
-    author: 'Dan Abramov, Andrew Clark',
-    num_comments: 2,
-    points: 5,
-    objectID: 1,
-  }
-];
-
-const getAsyncStories = () => // returns a promise with data in its shorthand version once it resolves. The resolved object holds the previous list of stories
-  new Promise((resolve, reject) => setTimeout(reject, 2000));
-
 const App = () => {
-
   const [searchTerm, setSearchTerm] = useSemiPersistentState(
     'search',
     'React'
@@ -86,14 +90,14 @@ const App = () => {
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
     getAsyncStories()
-      .then(result => {
+      .then((result) => {
         dispatchStories({
-          type: 'STORIES_FETCH_INIT',
+          type: 'STORIES_FETCH_SUCCESS',
           payload: result.data.stories,
         });        
       })
       .catch(() => 
-        dispatchStories({ type: 'STORIES_FETCH_INIT' })
+        dispatchStories({ type: 'STORIES_FETCH_FAILURE' })
       );
   }, []);
 
@@ -108,7 +112,7 @@ const App = () => {
     setSearchTerm(event.target.value);
   };
 
-  const searchedStories = stories.data.filter((story) => 
+  const searchedStories = stories.data.filter((story) =>
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
   
@@ -130,8 +134,8 @@ const App = () => {
       {stories.isError && <p>Something went wrong ...</p>}
 
       {stories.isLoading 
-      ? (<p>Loading...</p>) 
-      : (<List list={searchedStories} onRemoveItem={handleRemoveStory} />)
+        ? (<p>Loading...</p>) 
+        : (<List list={searchedStories} onRemoveItem={handleRemoveStory} />)
       }
     </div> 
   )
