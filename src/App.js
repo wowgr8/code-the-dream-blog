@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState, useCallback } from 'react';
 
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
@@ -58,23 +58,25 @@ const App = () => {
     { data: [], isLoading: false, isError: false }
   );
 
-  useEffect(()=> {
+  const handleFetchStories = useCallback(() => { // Memoized handler example
     if (!searchTerm) return;
-
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
-
     fetch(`${API_ENDPOINT}${searchTerm}`)
       .then((response) => response.json())
       .then((result) => {
         dispatchStories({
           type: 'STORIES_FETCH_SUCCESS',
           payload: result.hits,
-        });        
+        }); 
       })
-      .catch(() => 
+      .catch(() =>
         dispatchStories({ type: 'STORIES_FETCH_FAILURE' })
       );
-  }, [searchTerm]);
+  }, [searchTerm]); 
+
+  React.useEffect(() => {
+    handleFetchStories(); 
+  }, [handleFetchStories]); 
 
   const handleRemoveStory = (item) => {
     dispatchStories({
