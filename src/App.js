@@ -104,23 +104,7 @@ const App = () => {
     <div>
       <h1>My Hacker Stories</h1>
 
-      <form onSubmit={handleSearchSubmit}>
-        <InputWithLabel
-          id="search"
-          value={searchTerm}
-          isFocused
-          onInputChange={handleSearchInput}
-        >
-          <strong>Search:</strong>
-        </InputWithLabel>
 
-        <button 
-          type="submit"
-          disabled={!searchTerm}  
-        >
-          Submit
-        </button>
-      </form>
 
       <hr />
 
@@ -187,5 +171,25 @@ const Item = ({ item, onRemoveItem }) => (
     </span>
   </li> 
 );
+
+const searchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
+  <form onSubmit={onSearchSubmit}>
+    <InputWithLabel
+      id="search"
+      value={searchTerm}
+      isFocused
+      onInputChange={onSearchInput}
+    >
+      <strong>Search:</strong>
+    </InputWithLabel>
+
+    <button 
+      type="submit"
+      disabled={!searchTerm}  
+    >
+      Submit
+    </button>
+  </form>
+)
 
 export default App;
