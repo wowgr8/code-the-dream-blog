@@ -104,7 +104,11 @@ const App = () => {
     <div>
       <h1>My Hacker Stories</h1>
 
-
+      <SearchForm 
+        searchTerm={searchTerm}
+        onSearchInput={handleSearchInput}
+        onSearchSubmit={handleSearchSubmit}
+      />
 
       <hr />
 
@@ -172,7 +176,7 @@ const Item = ({ item, onRemoveItem }) => (
   </li> 
 );
 
-const searchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
+const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
   <form onSubmit={onSearchSubmit}>
     <InputWithLabel
       id="search"
