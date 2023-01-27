@@ -134,7 +134,9 @@ const InputWithLabel = ({ id, children, value, type = 'text', onInputChange, isF
   return(
     <>
       {/* Everything that’s passed between a component’s elements can be accessed as children in the component and be rendered somewhere. Sometimes when using a React component, you want to have more freedom from the outside regarding what to render on the inside of a component */}
-      <label htmlFor={id}>{children} </label> 
+      <label htmlFor={id} className="label">
+        {children} 
+      </label> 
       &nbsp;
       <input 
         id={id}
@@ -142,6 +144,7 @@ const InputWithLabel = ({ id, children, value, type = 'text', onInputChange, isF
         type={type} 
         value={value} 
         onChange={onInputChange} 
+        className="input"
       />
     </>
   );
