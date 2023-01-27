@@ -101,16 +101,14 @@ const App = () => {
   };
   
   return(
-    <div>
-      <h1>My Hacker Stories</h1>
+    <div className='container'>
+      <h1 className='headline-primary'>My Hacker Stories</h1>
 
       <SearchForm 
         searchTerm={searchTerm}
         onSearchInput={handleSearchInput}
         onSearchSubmit={handleSearchSubmit}
       />
-
-      <hr />
 
       {/* If the condition is true, the expression after the logical && operator will be the output. If the condition is false, React ignores it and skips the expression. */}
       {stories.isError && <p>Something went wrong ...</p>}
