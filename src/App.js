@@ -180,7 +180,7 @@ const Item = ({ item, onRemoveItem }) => (
 );
 
 const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
-  <form onSubmit={onSearchSubmit}>
+  <form onSubmit={onSearchSubmit} className="search-form">
     <InputWithLabel
       id="search"
       value={searchTerm}
@@ -192,7 +192,8 @@ const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
 
     <button 
       type="submit"
-      disabled={!searchTerm}  
+      disabled={!searchTerm} 
+      className="button button_large" 
     >
       Submit
     </button>
