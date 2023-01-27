@@ -134,7 +134,7 @@ const InputWithLabel = ({ id, children, value, type = 'text', onInputChange, isF
   return(
     <>
       {/* Everything that’s passed between a component’s elements can be accessed as children in the component and be rendered somewhere. Sometimes when using a React component, you want to have more freedom from the outside regarding what to render on the inside of a component */}
-      <label htmlFor={id} className="label">
+      <label htmlFor={id} className={styles.label}>
         {children} 
       </label> 
       &nbsp;
@@ -144,7 +144,7 @@ const InputWithLabel = ({ id, children, value, type = 'text', onInputChange, isF
         type={type} 
         value={value} 
         onChange={onInputChange} 
-        className="input"
+        className={styles.input}
       />
     </>
   );
@@ -183,7 +183,7 @@ const Item = ({ item, onRemoveItem }) => (
 );
 
 const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
-  <form onSubmit={onSearchSubmit} className="search-form">
+  <form onSubmit={onSearchSubmit} className={styles.searchForm}>
     <InputWithLabel
       id="search"
       value={searchTerm}
@@ -196,7 +196,7 @@ const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
     <button 
       type="submit"
       disabled={!searchTerm} 
-      className="button button_large" 
+      className={`${styles.button} ${styles.buttonLarge}`}
     >
       Submit
     </button>
