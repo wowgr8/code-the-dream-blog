@@ -174,7 +174,7 @@ const Item = ({ item, onRemoveItem }) => (
       <button 
         type="button" 
         onClick={() => onRemoveItem(item)}  
-        className='button button_small'
+        className={`${styles.button} ${styles.buttonSmall}`}
       >
         Dismiss
       </button>
