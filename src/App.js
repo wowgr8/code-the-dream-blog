@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState, useCallback } from 'react';
 import axios from 'axios';
-import './App.css';
+import styles from './App.module.css';
 
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
@@ -102,8 +102,8 @@ const App = () => {
   };
   
   return(
-    <div className='container'>
-      <h1 className='headline-primary'>My Hacker Stories</h1>
+    <div className={styles.container}>
+      <h1 className={styles.containerPrimary}>My Hacker Stories</h1>
 
       <SearchForm 
         searchTerm={searchTerm}
@@ -163,7 +163,7 @@ const List = ({ list, onRemoveItem }) => (
 ); 
 
 const Item = ({ item, onRemoveItem }) => (
-  <li className='item'>
+  <li className={styles.item}>
     <span style={{ width: '40%' }}>
       <a href={item.url}>{item.title}</a>
     </span>
