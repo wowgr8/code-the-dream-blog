@@ -51,8 +51,7 @@
   padding: 10px;
 }
 
-/* 
-.search-form {
+.searchForm {
   padding: 10px 0 20px 0;
   display: flex;
   align-items: baseline;
@@ -71,4 +70,4 @@
   background-color: transparent;
   
   font-size: 24px; 
-} */
+}
