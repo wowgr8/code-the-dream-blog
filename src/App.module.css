@@ -29,7 +29,7 @@
 .item > span > a { 
   color: inherit;
 }
-/* 
+
 .button {
   background: transparent;
   border: 1px solid #171212;
@@ -43,14 +43,15 @@
   color: #ffffff;
 }
 
-.button_small { 
+.buttonSmall { 
   padding: 5px;
 }
 
-.button_large { 
+.buttonLarge { 
   padding: 10px;
 }
 
+/* 
 .search-form {
   padding: 10px 0 20px 0;
   display: flex;
