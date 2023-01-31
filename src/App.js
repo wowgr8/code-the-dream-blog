@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useRef, useState, useCallback } from 'react';
 import axios from 'axios';
 import styles from './App.module.css';
+import { ReactComponent as Check } from './check.svg';
 
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
@@ -176,7 +177,7 @@ const Item = ({ item, onRemoveItem }) => (
         onClick={() => onRemoveItem(item)}  
         className={`${styles.button} ${styles.buttonSmall}`}
       >
-        Dismiss
+        <Check height="18px" width="18px" />
       </button>
     </span>
   </li> 
