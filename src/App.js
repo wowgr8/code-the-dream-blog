@@ -67,6 +67,20 @@ const StyledSearchForm = styled.form`
   align-items: baseline;
 `;
 
+const StyledLabel = styled.label` 
+  border-top: 1px solid #171212; 
+  border-left: 1px solid #171212; 
+  padding-left: 5px;
+  font-size: 24px;
+`;
+
+const StyledInput = styled.input` 
+  border: none;
+  border-bottom: 1px solid #171212; 
+  background-color: transparent;
+  font-size: 24px;
+`;
+
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
 
@@ -199,17 +213,16 @@ const InputWithLabel = ({ id, children, value, type = 'text', onInputChange, isF
   return(
     <>
       {/* Everything that’s passed between a component’s elements can be accessed as children in the component and be rendered somewhere. Sometimes when using a React component, you want to have more freedom from the outside regarding what to render on the inside of a component */}
-      <label htmlFor={id} className={styles.label}>
+      <StyledLabel htmlFor={id}>
         {children} 
-      </label> 
+      </StyledLabel> 
       &nbsp;
-      <input 
+      <StyledInput 
         id={id}
         ref={inputRef}
         type={type} 
         value={value} 
-        onChange={onInputChange} 
-        className={styles.input}
+        onChange={onInputChange}
       />
     </>
   );
@@ -247,7 +260,7 @@ const Item = ({ item, onRemoveItem }) => (
 );
 
 const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
-  <form onSubmit={onSearchSubmit} className={styles.searchForm}>
+  <StyledSearchForm onSubmit={onSearchSubmit} >
     <InputWithLabel
       id="search"
       value={searchTerm}
@@ -257,14 +270,13 @@ const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
       <strong>Search:</strong>
     </InputWithLabel>
 
-    <button 
+    <StyledButtonLarge 
       type="submit"
       disabled={!searchTerm} 
-      className={`${styles.button} ${styles.buttonLarge}`}
     >
       Submit
-    </button>
-  </form>
+    </StyledButtonLarge>
+  </StyledSearchForm>
 )
 
 export default App;
