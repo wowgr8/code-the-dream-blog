@@ -3,6 +3,70 @@ import axios from 'axios';
 // import styles from './App.module.css';
 import styled from 'styled-components';
 
+
+// When using Styled Components, you are using the JavaScript template literals the same way as JavaScript functions. Everything between the backticks can be seen as an argument and the styled object gives you access to all the necessary HTML elements (e.g. div, h1) as functions. Once a function is called with the style, it returns a React component that can be used in your App component
+const StyledContainer = styled.div` 
+  height: 100vw;
+  padding: 20px;
+
+  background: #83a4d4;
+  background: linear-gradient(to left, #b6fbff, #83a4d4);
+
+  color: #171212;
+`;
+
+const StyledHeadlinePrimary = styled.h1` 
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 2px;
+`;
+
+const StyledItem = styled.li` 
+  display: flex; 
+  align-items: center; 
+  padding-bottom: 5px;
+`;
+
+const StyledColumn = styled.span` 
+  padding: 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  a{
+    color: inherit;
+  }
+  width: ${(props) => props.width};
+`;
+
+const StyledButton = styled.button` 
+  background: transparent;
+  border: 1px solid #171212; 
+  padding: 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+
+  // CSS nesting are available in Styled Components by default. Nested elements are accessible and the current element can be selected with the & CSS operator
+  &:hover {
+    background: #171212;
+    color: #ffffff;
+  }  
+`;
+
+const StyledButtonSmall = styled(StyledButton)` 
+  padding: 5px;
+`;
+
+const StyledButtonLarge = styled(StyledButton)` 
+  padding: 10px;
+`;
+
+const StyledSearchForm = styled.form` 
+  padding: 10px 0 20px 0;
+  display: flex;
+  align-items: baseline;
+`;
+
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
 
@@ -103,8 +167,8 @@ const App = () => {
   };
   
   return(
-    <div className={styles.container}>
-      <h1 className={styles.containerPrimary}>My Hacker Stories</h1>
+    <StyledContainer>
+      <StyledHeadlinePrimary>My Hacker Stories</StyledHeadlinePrimary>
 
       <SearchForm 
         searchTerm={searchTerm}
@@ -119,7 +183,7 @@ const App = () => {
         ? (<p>Loading...</p>) 
         : (<List list={stories.data} onRemoveItem={handleRemoveStory} />)
       }
-    </div> 
+    </StyledContainer> 
   );
 };
 
@@ -164,23 +228,22 @@ const List = ({ list, onRemoveItem }) => (
 ); 
 
 const Item = ({ item, onRemoveItem }) => (
-  <li className={styles.item}>
-    <span style={{ width: '40%' }}>
+  <StyledItem>
+    <StyledColumn width="40%">
       <a href={item.url}>{item.title}</a>
-    </span>
-    <span style={{ width: '30%' }}>{item.author}</span>
-    <span style={{ width: '10%' }}>{item.num_comments}</span>
-    <span style={{ width: '10%' }}>{item.points}</span>
-    <span style={{ width: '10%' }}>
-      <button 
+    </StyledColumn>
+    <StyledColumn width="30%">{item.author}</StyledColumn>
+    <StyledColumn width="10%">{item.num_comments}</StyledColumn>
+    <StyledColumn width="10%">{item.points}</StyledColumn>
+    <StyledColumn width="10%">
+      <StyledButtonSmall 
         type="button" 
         onClick={() => onRemoveItem(item)}  
-        className={`${styles.button} ${styles.buttonSmall}`}
       >
         Dismiss
-      </button>
-    </span>
-  </li> 
+      </StyledButtonSmall>
+    </StyledColumn>
+  </StyledItem> 
 );
 
 const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
