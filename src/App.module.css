@@ -51,6 +51,11 @@
   padding: 10px;
 }
 
+.button:hover > svg > g { 
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+
 .searchForm {
   padding: 10px 0 20px 0;
   display: flex;
