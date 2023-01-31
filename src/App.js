@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useRef, useState, useCallback } from 'rea
 import axios from 'axios';
 import styles from './App.module.css';
 import { ReactComponent as Check } from './check.svg';
+import { ReactComponent as MagGlass } from './magnifying-glass.svg';
 
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
@@ -191,7 +192,7 @@ const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit, }) => (
       isFocused
       onInputChange={onSearchInput}
     >
-      <strong>Search:</strong>
+      <strong>Search <MagGlass height="18px" width="18px"/> :</strong>
     </InputWithLabel>
 
     <button 
