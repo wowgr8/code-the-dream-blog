@@ -5,10 +5,16 @@ import { ReactComponent as Check } from './check.svg';
 import { ReactComponent as MagGlass } from './magnifying-glass.svg';
 
 const useSemiPersistentState = (key, initialState) => { // synchronizes the state with the browser’s local storage
+  const isMounted = useRef(false);
   const [value, setValue] = useState(localStorage.getItem(key) || initialState); //  use the stored value, if a value exists, to set the initial state of the searchTerm in React’s useState Hook. Otherwise, default to our initial state as before
 
   useEffect(() => { 
-    localStorage.setItem(key, value); // uses local storage to store the searchTerm accompanied by an identifier whenever a user types into the HTML input field
+    if(!isMounted.current){
+      isMounted.current = true;
+    } else { 
+      console.log('A');
+      localStorage.setItem(key, value); // uses local storage to store the searchTerm accompanied by an identifier whenever a user types into the HTML input field
+    }
   }, [value, key]); // Whenever and wherever the searchTerm state is updated via setSearchTerm, the browser’s local storage will always be in sync with it.
 
   return [value, setValue];
@@ -105,7 +111,7 @@ const App = () => {
   
   return(
     <div className={styles.container}>
-      <h1 className={styles.containerPrimary}>My Hacker Stories</h1>
+      <h1 className={styles.headlinePrimary}>My Hacker Stories</h1>
 
       <SearchForm 
         searchTerm={searchTerm}
