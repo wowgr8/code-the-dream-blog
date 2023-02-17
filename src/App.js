@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useReducer, useRef, useState, useCallback, memo } from 'react';
 import axios from 'axios';
 import styles from './App.module.css';
 import { ReactComponent as Check } from './check.svg';
@@ -92,12 +92,12 @@ const App = () => {
     handleFetchStories(); 
   }, [handleFetchStories]); 
 
-  const handleRemoveStory = (item) => {
+  const handleRemoveStory = useCallback((item) => {
     dispatchStories({
       type: 'REMOVE_STORY',
       payload: item,
     });
-  };
+  }, []);
 
   const handleSearchInput = (event) => {
     setSearchTerm(event.target.value);
@@ -109,6 +109,8 @@ const App = () => {
     event.preventDefault();
   };
   
+  console.log('B:App');
+
   return(
     <div className={styles.container}>
       <h1 className={styles.headlinePrimary}>My Hacker Stories</h1>
@@ -158,17 +160,20 @@ const InputWithLabel = ({ id, children, value, type = 'text', onInputChange, isF
   );
 }; 
 
-const List = ({ list, onRemoveItem }) => (
-  <ul>
-    {list.map((item) => (
-      <Item 
-        key={item.objectID} 
-        item={item}
-        onRemoveItem={onRemoveItem}
-      /> 
-    ))}
-  </ul>
-); 
+const List = memo(
+  ({ list, onRemoveItem }) => 
+    console.log('B:List') || (
+    <ul>
+      {list.map((item) => (
+        <Item 
+          key={item.objectID} 
+          item={item}
+          onRemoveItem={onRemoveItem}
+        /> 
+      ))}
+    </ul>
+  )
+);
 
 const Item = ({ item, onRemoveItem }) => (
   <li className={styles.item}>
