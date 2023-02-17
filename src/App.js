@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState, useCallback, memo } from 'react';
+import React, { useEffect, useReducer, useRef, useState, useCallback, memo, useMemo } from 'react';
 import axios from 'axios';
 import styles from './App.module.css';
 import { ReactComponent as Check } from './check.svg';
@@ -57,6 +57,14 @@ const storiesReducer = (state, action) => {
 
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
+const getSumComments = (stories) => {
+  console.log('C');
+  return stories.data.reduce(
+    (result, value) => result + value.num_comments,
+    0
+  ); 
+};
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState(
     'search',
@@ -111,9 +119,13 @@ const App = () => {
   
   console.log('B:App');
 
+  const sumComments = useMemo(() => getSumComments(stories), [
+    stories,
+  ]);
+
   return(
     <div className={styles.container}>
-      <h1 className={styles.headlinePrimary}>My Hacker Stories</h1>
+      <h1 className={styles.headlinePrimary}>My Hacker Stories with {sumComments} comments.</h1>
 
       <SearchForm 
         searchTerm={searchTerm}
